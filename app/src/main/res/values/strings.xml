@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="tag_layer_1">Layar 1</string>
+    <string name="title_activity_first">Layar Pertama</string>
+    <string name="subtitle_activity_first">Silakan masukkan username untuk dikirim ke layar kedua</string>
+    <string name="hint_username">Username</string>
+    <string name="btn_send">Kirim ke Layar 2</string>
+
+    <string name="tag_layer_2">Layar 2</string>
+    <string name="title_activity_second">Layar Kedua</string>
+    <string name="subtitle_activity_second">Data yang diterima dari layar pertama:</string>
+    <string name="welcome_message">Selamat datang, %1$s!</string>
+    <string name="no_data">Tidak ada data yang dikirim</string>
+    <string name="hint_username_result">Username yang diterima</string>
+    <string name="btn_back">Kembali ke Layar 1</string>
+    <string name="error_empty_username">Username tidak boleh kosong!</string>
+</resources>
