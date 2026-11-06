@@ -31,7 +31,13 @@ class SecondActivity : AppCompatActivity() {
         val tvHeroGreeting = findViewById<TextView>(R.id.tvHeroGreeting)
         tvHeroGreeting.text = getString(R.string.dashboard_greeting, displayName)
 
-        // 3. Interaksi Tombol Notifikasi & Profil
+        // 3. Tombol Kembali ke Layar 1
+        val btnBack = findViewById<ImageView>(R.id.btnBack)
+        btnBack.setOnClickListener {
+            finish()
+        }
+
+        // 4. Interaksi Tombol Notifikasi & Profil
         val btnNotification = findViewById<ImageView>(R.id.btnNotification)
         btnNotification.setOnClickListener {
             Toast.makeText(this, "Tidak ada notifikasi baru", Toast.LENGTH_SHORT).show()
