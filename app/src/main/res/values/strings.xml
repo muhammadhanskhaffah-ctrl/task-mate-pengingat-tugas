@@ -10,6 +10,7 @@
     <string name="title_activity_second">Layar Kedua</string>
     <string name="subtitle_activity_second">Data yang diterima dari layar pertama:</string>
     <string name="welcome_message">Selamat datang, %1$s!</string>
+    <string name="dashboard_greeting">Halo, %1$s! 👋</string>
     <string name="no_data">Tidak ada data yang dikirim</string>
     <string name="hint_username_result">Username yang diterima</string>
     <string name="btn_back">Kembali ke Layar 1</string>

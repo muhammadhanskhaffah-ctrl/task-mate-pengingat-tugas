@@ -1,118 +1,73 @@
-# Two-Screen Data Transfer App (Android Kotlin)
+# TaskMate - Two-Screen Task Reminder & Dashboard App (Android Kotlin)
 
-Aplikasi Android sederhana berbasis **Kotlin** dan **Material 3 Design** yang mendemonstrasikan implementasi navigasi antar-*Activity* serta transfer data (*Explicit Intent*) dari layar pertama (*MainActivity*) ke layar kedua (*SecondActivity*).
-
----
-
-## 📱 Tangkapan Layar (Screenshots)
-
-| Layar 1: Form Input | Layar 2: Hasil & Penerimaan Data |
-| :---: | :---: |
-| Input username & tombol Kirim | Sambutan & inputan hasil terisi otomatis |
+Aplikasi Android modern berbasis **Kotlin** dan **Material 3 Design** yang mengimplementasikan transfer data (*Explicit Intent*) dari formulir input di layar pertama (*MainActivity*) ke layar utama **Dashboard TaskMate** (*SecondActivity*).
 
 ---
 
-## ✨ Fitur Utama
+## 📱 Alur Dua Layar (User Flow)
 
-1. **Input Data Dinamis (Layar 1)**:
-   - Form input username dengan `TextInputLayout` berdesain *Outlined Box* modern.
-   - Validasi input: Menampilkan pesan peringatan jika inputan kosong.
-2. **Pengiriman Data Antar Layar**:
-   - Memanfaatkan **Explicit Intent** dengan mekanisme `putExtra()` untuk mentransfer teks ke *Activity* tujuan.
-3. **Penerimaan & Penampilan Data (Layar 2)**:
-   - Mengambil data melalui `intent.getStringExtra()`.
-   - Data otomatis ditampilkan ke dalam teks sambutan (`TextView`) dan kolom input (`TextInputEditText`).
-4. **Navigasi Kembali**:
-   - Tombol "Kembali ke Layar 1" yang memanfaatkan fungsi `finish()` untuk menutup *Activity* saat ini dan kembali ke antrean layar sebelumnya.
-5. **Desain Modern Material 3**:
-   - Menggunakan `MaterialCardView` dengan sudut membulat (*rounded corners*), elevasi lembut, dan palet warna modern.
-   - Mendukung penyesuaian *Edge-to-Edge* dan sistem status bar modern.
+1. **Layar 1 (Formulir Input)**:
+   - Pengguna memasukkan nama / username (misal: `Muhammad Hans Khaffah`).
+   - Terdapat validasi agar input tidak boleh kosong.
+   - Menekan tombol **"Kirim ke Layar 2"** akan memicu *Explicit Intent* menuju Dashboard.
 
----
-
-## 🛠️ Teknologi & Dependensi
-
-- **Bahasa Pemrograman**: [Kotlin](https://kotlinlang.org/)
-- **Target SDK**: Android 14+ (API Level 34-37)
-- **Minimum SDK**: Android 7.0 (API Level 24)
-- **Komponen UI**:
-  - AndroidX AppCompat & ConstraintLayout
-  - Material Components for Android (Material 3)
-- **Arsitektur**: Native Android Activity-based Architecture
+2. **Layar 2 (Dashboard TaskMate)**:
+   - **Header Brand**: Logo TaskMate, judul "Tugas", ikon lonceng notifikasi, dan avatar profil.
+   - **Hero Greeting Banner**: Kartu gradien bernuansa indigo-ungu dengan sapaan dinamis `"Halo, [Nama Pengguna]! 👋"` dan tag `"Senin Semangat ☀️"`.
+   - **Progres Produktivitas**: Kartu metrik dengan progress bar horizontal (65% selesai, 4 dari 6).
+   - **Filter Chips**: Kategori filter tugas (*Semua 5*, *Hari Ini 3*, *Penting 2*, *Selesai 4*).
+   - **Daftar Agenda (Task Cards)**:
+     - 🔴 **High Priority**: *Revisi Laporan Finansial Q3* (14:00, Kerja, Q3 Report).
+     - 🟠 **Medium Priority**: *Beli Kado Ulang Tahun Ibu* (17:30, Pribadi, Mall Senayan).
+     - 🔵 **Low Priority**: *Meeting Proyek Mobile Task...* (19:00, Proyek, Avatar AL & RA).
+     - 🟣 **Selesai (Completed)**: *Review Proposal Desain* (09:15, Desain).
+     - *Interaktif*: Checkbox bulat dapat diklik/di-toggle untuk menyelesaikan tugas!
+   - **Tips Fokus (Pomodoro)**: Kartu tips fokus 25 menit dengan tombol "Mulai".
+   - **Bottom Navigation Bar**: Navigasi *Tugas*, *Kalender*, tombol *Floating Action Button (FAB +)* di tengah, dan *Profil*.
 
 ---
 
-## 📂 Struktur Proyek
+## 🛠️ Teknologi & Komponen
+
+- **Bahasa**: [Kotlin](https://kotlinlang.org/)
+- **UI Framework**: Android XML Views dengan Google Material 3 (`com.google.android.material`)
+- **Komponen Utama**:
+  - `CoordinatorLayout` & `NestedScrollView`
+  - `MaterialCardView`
+  - `LinearProgressIndicator`
+  - `FloatingActionButton` (FAB)
+  - Custom Vector Drawables (Badge, Icons, Hero Gradient)
+- **Komunikasi Antar Layar**: Android `Intent` (`putExtra` & `getStringExtra`)
+
+---
+
+## 📂 Struktur Berkas
 
 ```text
 app/src/main/
 ├── AndroidManifest.xml                  # Pendaftaran MainActivity & SecondActivity
 ├── java/com/example/myapplication/
-│   ├── MainActivity.kt                  # Logika form input & pengiriman Intent
-│   └── SecondActivity.kt                # Logika penerimaan data & tombol kembali
+│   ├── MainActivity.kt                  # Form input & pengiriman nama via Intent
+│   └── SecondActivity.kt                # Dashboard TaskMate interaktif
 └── res/
-    ├── drawable/
-    │   └── badge_background.xml         # Desain badge tag "Layar 1" / "Layar 2"
+    ├── drawable/                        # Vektor ikon & background gradien TaskMate
+    │   ├── bg_hero_gradient.xml
+    │   ├── ic_taskmate_logo.xml
+    │   ├── ic_bell.xml
+    │   ├── ic_trending_up.xml
+    │   ├── ic_check_circle.xml
+    │   └── ...
     ├── layout/
-    │   ├── activity_main.xml            # Tampilan UI Layar Pertama
-    │   └── activity_second.xml          # Tampilan UI Layar Kedua
+    │   ├── activity_main.xml            # UI Layar 1 (Formulir)
+    │   └── activity_second.xml          # UI Layar 2 (Dashboard TaskMate)
     └── values/
-        ├── colors.xml                   # Palet warna modern (primary, surface, background)
-        ├── strings.xml                  # Resource teks dan template pesan
-        └── themes.xml                   # Tema Material 3 DayNight
+        ├── colors.xml                   # Palet warna TaskMate (Indigo, Cyan, Rose)
+        ├── strings.xml                  # String resources
+        └── themes.xml                   # Tema Material 3
 ```
-
----
-
-## 🧠 Penjelasan Logika Kode (Code Explanation)
-
-### 1. Mengirim Data dari `MainActivity`
-```kotlin
-val username = etUsername.text.toString().trim()
-
-if (username.isEmpty()) {
-    etUsername.error = getString(R.string.error_empty_username)
-    return@setOnClickListener
-}
-
-// Membuat Explicit Intent dan menyisipkan data ekstra
-val intent = Intent(this, SecondActivity::class.java).apply {
-    putExtra(MainActivity.EXTRA_USERNAME, username)
-}
-startActivity(intent)
-```
-
-### 2. Menerima Data di `SecondActivity`
-```kotlin
-// Mengambil string yang dikirim dengan key EXTRA_USERNAME
-val receivedUsername = intent.getStringExtra(MainActivity.EXTRA_USERNAME) ?: ""
-
-// Menampilkan data ke UI
-if (receivedUsername.isNotEmpty()) {
-    tvWelcome.text = getString(R.string.welcome_message, receivedUsername)
-    etResult.setText(receivedUsername)
-}
-```
-
-### 3. Kembali ke Layar Sebelumnya
-```kotlin
-btnBack.setOnClickListener {
-    finish() // Menutup Activity kedua dan kembali ke Activity pertama
-}
-```
-
----
-
-## 🚀 Cara Menjalankan Aplikasi
-
-1. Buka folder proyek ini di **Android Studio**.
-2. Pastikan koneksi internet aktif agar Gradle dapat mengunduh dependensi yang diperlukan.
-3. Hubungkan perangkat Android fisik via USB Debugging atau jalankan Android Emulator.
-4. Klik tombol **Run** (ikon segitiga hijau ▶️) pada toolbar atas, atau tekan `Shift + F10`.
-5. Masukkan nama/username pada layar pertama dan tekan **Kirim ke Layar 2**.
 
 ---
 
 ## 👨‍💻 Pengembang
 - **Nama**: Muhammad Hans Khaffah
-- **Proyek**: My Application (Android Studio)
+- **Proyek**: TaskMate (Android Studio)

@@ -2,11 +2,40 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="primary">#2563EB</color>
-    <color name="primary_dark">#1D4ED8</color>
-    <color name="primary_light">#DBEAFE</color>
-    <color name="background">#F1F5F9</color>
+    <color name="primary">#4F46E5</color>
+    <color name="primary_dark">#4338CA</color>
+    <color name="primary_light">#EEF2FF</color>
+    <color name="background">#F8FAFC</color>
     <color name="surface">#FFFFFF</color>
     <color name="text_primary">#0F172A</color>
     <color name="text_secondary">#64748B</color>
+    <color name="text_muted">#94A3B8</color>
+
+    <!-- TaskMate Gradient & Brand -->
+    <color name="hero_gradient_start">#4F46E5</color>
+    <color name="hero_gradient_end">#6366F1</color>
+    <color name="hero_tag_bg">#2EFFFFFF</color>
+    <color name="progress_track">#E2E8F0</color>
+    <color name="progress_bar">#4F46E5</color>
+
+    <!-- Priorities -->
+    <color name="priority_high_bg">#FEE2E2</color>
+    <color name="priority_high_text">#DC2626</color>
+    <color name="priority_medium_bg">#FFEDD5</color>
+    <color name="priority_medium_text">#D97706</color>
+    <color name="priority_low_bg">#CFFAFE</color>
+    <color name="priority_low_text">#0891B2</color>
+    <color name="priority_done_bg">#F1F5F9</color>
+    <color name="priority_done_text">#64748B</color>
+
+    <!-- Chips & Categories -->
+    <color name="chip_inactive_bg">#EEF2F6</color>
+    <color name="category_bg">#F1F5F9</color>
+    <color name="tips_bg">#ECFEFF</color>
+    <color name="tips_icon_bg">#CFFAFE</color>
+    <color name="tips_icon">#06B6D4</color>
+
+    <!-- Checkbox colors -->
+    <color name="task_checked">#6366F1</color>
+    <color name="task_unchecked_bg">#E0E7FF</color>
 </resources>

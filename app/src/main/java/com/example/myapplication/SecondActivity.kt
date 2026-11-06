@@ -1,13 +1,14 @@
 package com.example.myapplication
 
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class SecondActivity : AppCompatActivity() {
 
@@ -18,29 +19,64 @@ class SecondActivity : AppCompatActivity() {
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.second_main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0)
             insets
         }
 
-        val tvWelcome = findViewById<TextView>(R.id.tvWelcome)
-        val etResult = findViewById<EditText>(R.id.etResult)
-        val btnBack = findViewById<Button>(R.id.btnBack)
+        // 1. Ambil data nama dari Intent (yang diinputkan di layar pertama)
+        val receivedUsername = intent.getStringExtra(MainActivity.EXTRA_USERNAME)
+        val displayName = if (!receivedUsername.isNullOrBlank()) receivedUsername else "Muhammad Hans Khaffah"
 
-        // 1. Ambil data username yang dikirim dari MainActivity lewat Intent
-        val receivedUsername = intent.getStringExtra(MainActivity.EXTRA_USERNAME) ?: ""
+        // 2. Pasang nama pengguna ke Banner Sambutan
+        val tvHeroGreeting = findViewById<TextView>(R.id.tvHeroGreeting)
+        tvHeroGreeting.text = getString(R.string.dashboard_greeting, displayName)
 
-        // 2. Tampilkan data pada TextView dan EditText di Layar Kedua
-        if (receivedUsername.isNotEmpty()) {
-            tvWelcome.text = getString(R.string.welcome_message, receivedUsername)
-            etResult.setText(receivedUsername)
-        } else {
-            tvWelcome.text = getString(R.string.no_data)
-            etResult.setText("")
+        // 3. Interaksi Tombol Notifikasi & Profil
+        val btnNotification = findViewById<ImageView>(R.id.btnNotification)
+        btnNotification.setOnClickListener {
+            Toast.makeText(this, "Tidak ada notifikasi baru", Toast.LENGTH_SHORT).show()
         }
 
-        // 3. Tombol untuk kembali ke layar pertama
-        btnBack.setOnClickListener {
-            finish()
+        val imgProfile = findViewById<ImageView>(R.id.imgProfile)
+        imgProfile.setOnClickListener {
+            Toast.makeText(this, "Profil: $displayName", Toast.LENGTH_SHORT).show()
+        }
+
+        // 4. Interaksi Checkbox Tugas (Dapat dicentang/di-toggle)
+        setupTaskCheckboxes()
+
+        // 5. FAB Tambah Tugas
+        val fabAddTask = findViewById<FloatingActionButton>(R.id.fabAddTask)
+        fabAddTask.setOnClickListener {
+            Toast.makeText(this, "Tambah Tugas Baru", Toast.LENGTH_SHORT).show()
+        }
+
+        // 6. Tips Pomodoro
+        val btnStartTips = findViewById<TextView>(R.id.btnStartTips)
+        btnStartTips.setOnClickListener {
+            Toast.makeText(this, "Memulai timer Pomodoro 25 menit...", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun setupTaskCheckboxes() {
+        val tasks = listOf(
+            Pair(findViewById<ImageView>(R.id.chkTask1), false),
+            Pair(findViewById<ImageView>(R.id.chkTask2), false),
+            Pair(findViewById<ImageView>(R.id.chkTask3), false),
+            Pair(findViewById<ImageView>(R.id.chkTask4), true),
+        )
+
+        for ((checkbox, isCheckedInitially) in tasks) {
+            var checked = isCheckedInitially
+            checkbox.setOnClickListener {
+                checked = !checked
+                if (checked) {
+                    checkbox.setImageResource(R.drawable.ic_check_circle)
+                    Toast.makeText(this, "Tugas ditandai selesai!", Toast.LENGTH_SHORT).show()
+                } else {
+                    checkbox.setImageResource(R.drawable.ic_circle_empty)
+                }
+            }
         }
     }
 }
